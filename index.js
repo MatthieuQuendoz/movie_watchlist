@@ -1,5 +1,6 @@
 const searchtBtn = document.getElementById("search-btn");
 const container = document.getElementById("container");
+const watchlist = document.getElementById("watchlist")
 
 const savedmovies = [];
 
@@ -28,7 +29,7 @@ fetch(`https://www.omdbapi.com/?apikey=f103c4b2&s=${searchInput}`)
                 <div class="title">
                     <p> ${details.Year} </p>
                   <h3>${details.Title}</h3>
-                  <p>${details.imdbRating}</p>
+                  <p>${details.imdbRating}☆</p>
                 </div>
                 <div class="info">
                   <p>${details.Runtime}</p>
@@ -50,7 +51,9 @@ container.addEventListener("click", (e)=> {
     if(!savedmovies.includes(imdbId)) {
       savedmovies.push(imdbId)
     }
-    console.log(savedmovies)
+
+    localStorage.setItem("watchlist", JSON.stringify(savedmovies))
     e.target.textContent = "Salvato!"
   }
 })
+
